@@ -4,15 +4,17 @@ import LoginComponent from '../LoginPage/LoginComponent'
 import RegistrationComponent from '../RegistrationPage/RegistrationComponent'
 
 class RouterComponent extends Component{
+	
 	render(){
+		console.log('Route',this.props);
 		return <Router basename={'/employeeapp/'}> 
 				<Switch>
 					<Route exact 
 						path="/" 
 						render = {(props)=>{
+							
 							return <LoginComponent 
-								loginprops={this.props.login}
-								loginchange={this.props.loginchange}
+								onSubmit={this.props.loginsubmit}
 							/> 
 						}}
 					/>
@@ -21,8 +23,7 @@ class RouterComponent extends Component{
 						path="/login" 
 						render = {(props)=>{
 							return <LoginComponent 
-								loginprops={this.props.login}
-								loginchange={this.props.loginchange}
+								onSubmit={this.props.loginsubmit}
 							/> 
 						}}
 					/>
@@ -31,8 +32,7 @@ class RouterComponent extends Component{
 						path="/register" 
 						render = {(props)=>{
 							return <RegistrationComponent 
-								registerprops={this.props.register}
-								registerchange={this.props.registerchange}
+								onSubmit={this.props.loginsubmit}
 							/> 
 						}}
 					/>

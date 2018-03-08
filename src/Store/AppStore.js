@@ -7,10 +7,11 @@ const logger = (store) => (next) => (action) => {
 	return next(action);
 }
 
-// Create store with reducers and initial state
+
 const store = createStore(
-			AppReducers,
-			applyMiddleware(thunk, logger));
+	AppReducers,
+	applyMiddleware(logger, thunk)
+);
 
 export default store;
 	
