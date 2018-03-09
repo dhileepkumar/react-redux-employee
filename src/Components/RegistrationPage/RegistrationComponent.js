@@ -24,6 +24,7 @@ const loginfrom_button_clear ={
 };
 
 
+
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
   <div className="form-group">
 	<div className="col-xs-12 ">
@@ -54,14 +55,24 @@ const FormDetails = (props) => {
 }
 
 class RegisterComponent extends Component {
+  componentWillMount(){
+	  this.show_block=this.props.authdetails.signupalready;
+	
+  }
+  componentWillUpdate(nextProps, nextState){
+	 this.show_block= nextProps.authdetails.signupalready;
+  }
   render() {
     return <div id="login-container">
 			<HeadingComponent pageheading={'Employee Registration Page'} />
+			<div className={this.show_block ? 'block animation-fadeInQuickInv hidden' : 'block animation-fadeInQuickInv '}>
+					<BlockTitle panneltitle={'Employee Details'} pagelink={'login'}/>
+					<FormDetails details={this.props}/>
+			</div>
+			<div className={this.show_block ? 'block animation-fadeInQuickInv ' : 'block animation-fadeInQuickInv hidden'}>
+					<BlockTitle panneltitle={'You Already registred your account . Please Sign in'} pagelink={'login'}/>
+			</div>
 			
-            <div className="block animation-fadeInQuickInv">
-				<BlockTitle panneltitle={'Employee Details'} pagelink={'login'}/>
-				<FormDetails details={this.props}/>
-            </div>
         </div>
   
   

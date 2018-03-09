@@ -35,6 +35,7 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 
 const SyncValidationForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props.details
+  console.log(props)
   return (
     <form onSubmit={handleSubmit} className="form-horizontal">
       <Field name="username" type="text" component={renderField} label="Username"/>

@@ -6,7 +6,7 @@ import RegistrationComponent from '../RegistrationPage/RegistrationComponent'
 class RouterComponent extends Component{
 	
 	render(){
-		console.log('Route',this.props);
+		console.log(this.props);
 		return <Router basename={'/employeeapp/'}> 
 				<Switch>
 					<Route exact 
@@ -33,6 +33,7 @@ class RouterComponent extends Component{
 						render = {(props)=>{
 							return <RegistrationComponent 
 								onSubmit={this.props.loginsubmit}
+								authdetails ={this.props.authdetails}
 							/> 
 						}}
 					/>

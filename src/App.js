@@ -7,7 +7,8 @@ import ActionCreators from './Actions/ActionCreators';
 
 const mapStateToProps = (state) => ({
   authendicated:false,
-  registeruser:state.auth,
+  authdetails:state.auth,
+  email:''
 })
 
 

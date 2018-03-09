@@ -1,5 +1,5 @@
 import {REQUEST_LOGIN, RECEIVE_LOGIN, AUTHENTICATION_PASS, AUTHENTICATION_FAILED, REQUEST_REGISTRATION, RECEIVE_REGISTRATION} from './Constants';
-import FirebaseApis from '../Firebase/FirebaseApis'
+import { FirebaseAuth } from '../Firebase'
 
 const ActionCreators = {
 	doUserLogin(values){
@@ -11,29 +11,28 @@ const ActionCreators = {
 	},
 	doUserRegistration(values){
 		return (dispatch) => {
-			dispatch({ type: REQUEST_REGISTRATION, values });
-			FirebaseApis.CreateUser(values.email, values.password).then(
-				
+			dispatch({ type: REQUEST_REGISTRATION, payload:  values});
+			FirebaseAuth.doCreateUserWithEmailAndPassword(values.email, values.password).then(
+				(result) => dispatch({
+					type:RECEIVE_REGISTRATION, 
+					payload:{
+						email:result.email, 
+						uid:result.uid, 
+						password:'',
+						message:'successfully created your account',
+						signupalready:true,
+						signinalready:false,
+					},
+					success:true
+				}),
+				(error) => console.log(error)
 			)
-		}
-	},
-	fetchUserLogin(username, userpassword){
-		return  (dispatch) => {
-			dispatch({type:REQUEST_LOGIN});
-		}
-	},
-	
-	fetchUserRegistration(email, username){
-		return  (dispatch) => {
-			dispatch({type:REQUEST_REGISTRATION});
-			FirebaseApis.CreateUser().then(
-				(userdetails)=>dispatch({type:RECEIVE_REGISTRATION, success:true, userdetails}),
-				(error)=>dispatch({type:AUTHENTICATION_FAILED, success:false})
-			).catch( error=> {
-				(error) => dispatch({type:AUTHENTICATION_FAILED, success:false})
+			.catch((error)=>{
+					console.log(error);
 			})
 		}
 	},
+	
 }
 
 export default ActionCreators;
