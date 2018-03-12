@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
-import HeadingComponent from '../Shared/HeadingComponent'
-import BlockTitle from '../Shared/FromElements/Block/Title/BlockTitle'
-import Button from '../Shared/FromElements/Button/Button'
+import {Redirect} from 'react-router-dom';
+
+
+import HeadingComponent from '../../Components/Shared/HeadingComponent'
+import BlockTitle from '../../Components/Shared/FromElements/Block/Title/BlockTitle'
+import Button from '../../Components/Shared/FromElements/Button/Button'
 import AppValidation from '../../Validations/Validations'
 
 
@@ -38,7 +41,7 @@ const SyncValidationForm = (props) => {
   console.log(props)
   return (
     <form onSubmit={handleSubmit} className="form-horizontal">
-      <Field name="username" type="text" component={renderField} label="Username"/>
+      <Field name="email" type="text" component={renderField} label="Email"/>
       <Field name="password" type="password" component={renderField} label="password"/>
 
       <div className="form-group">
@@ -51,14 +54,30 @@ const SyncValidationForm = (props) => {
     </form>
   )
 }
-
 class LoginComponent extends Component {
+  
+  componentWillMount(){
+
+
+    if(this.props.authdetails){
+      this.props.history.push('/dashboard')
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    console.log(nextProps);
+    if(nextProps.authdetails){
+       this.props.history.push('/dashboard')
+    }
+  }
 
   render() {
+
     return <div id="login-container">
 			<HeadingComponent pageheading={'Employee Login Page'}/>
             <div className="block animation-fadeInQuickInv">
 				<BlockTitle panneltitle={'Employee Details'} pagelink={'register'}/>
+                <div className="text-danger text-center">{this.props.logindetail.authmessage}</div>
                	<SyncValidationForm details={this.props}/>
             </div>
         </div>

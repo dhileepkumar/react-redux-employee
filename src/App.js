@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import {connect, Provider} from 'react-redux';
-import RouterComponent from './Components/Router/Router';
+import RouterComponent from './Container/Router/Router';
 import AppStore from './Store/AppStore';
-import ShowResults from './Validations/Validations';
 import ActionCreators from './Actions/ActionCreators';
 
 const mapStateToProps = (state) => ({
-  authendicated:false,
-  authdetails:state.auth,
+  authentication:state.auth.auth,
+  authmessage:state.auth.message,
+  usertoken:state.auth.token,
+  authdetails:state.loginregister,
   email:''
 })
 
 
 const mapDispatchToProps = (dispatch) => ({
-  loginsubmit: (values) => dispatch(ActionCreators.doUserRegistration(values)),
-  doLogin:(userdetails) => dispatch(ActionCreators.fetchUserLogin(userdetails)),
-  doRegister: (userdetails) => dispatch(ActionCreators.fetchUserRegistration(userdetails)),
+  loginsubmit: (values) => dispatch(ActionCreators.doUserLogin(values)),
+  registersubmit: (values) => dispatch(ActionCreators.doUserRegistration(values)),
   fetchProfile:'',
   fetechStatus:''
 })

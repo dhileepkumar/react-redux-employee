@@ -1,27 +1,21 @@
-import {REQUEST_LOGIN, REQUEST_REGISTRATION, RECEIVE_REGISTRATION, RECEIVE_LOGIN} from '../Actions/Constants';
+import {AUTHENTICATION_PASS, AUTHENTICATION_FAILED, AUTHENTICATION_ERROR} from '../Actions/Constants';
 
-const initialState =  {
-	email:'',
-	uid:'',
-	password:'',
+const initialState = {
+	auth:false,
+	token:'',
 	message:'',
-	signupalready:false,
-	signinalready:false
 }
 
-const register = (state = initialState,action) => {
+const AuthReducer = (state = initialState,action) => {
 	switch(action.type){
 		
-		case REQUEST_LOGIN:
+		case AUTHENTICATION_PASS:
 		return action.payload;
 		
-		case RECEIVE_LOGIN:
-		return action.userdata;
-		
-		case REQUEST_REGISTRATION:
+		case AUTHENTICATION_FAILED:
 		return action.payload;
-		
-		case RECEIVE_REGISTRATION:
+
+		case AUTHENTICATION_ERROR:
 		return action.payload;
 
 		default:
@@ -29,4 +23,4 @@ const register = (state = initialState,action) => {
 	}
 }
 
-export default register;
+export default AuthReducer;

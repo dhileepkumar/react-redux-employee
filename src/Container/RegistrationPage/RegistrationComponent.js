@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Field, reduxForm} from 'redux-form'
-import HeadingComponent from '../Shared/HeadingComponent'
-import BlockTitle from '../Shared/FromElements/Block/Title/BlockTitle'
-import Button from '../Shared/FromElements/Button/Button'
+import HeadingComponent from '../../Components/Shared/HeadingComponent'
+import BlockTitle from '../../Components/Shared/FromElements/Block/Title/BlockTitle'
+import Button from '../../Components/Shared/FromElements/Button/Button'
 import AppValidation from '../../Validations/Validations'
 
 /* login from details */
@@ -40,7 +40,6 @@ const FormDetails = (props) => {
   return (
     <form onSubmit={handleSubmit} className="form-horizontal">
 	  <Field name="email" type="email" component={renderField} label="E - Mail"/>
-      <Field name="username" type="text" component={renderField} label="Username"/>
       <Field name="password" type="password" component={renderField} label="password"/>
 
       <div className="form-group">
